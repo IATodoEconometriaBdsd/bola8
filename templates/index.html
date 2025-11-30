@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Spooky Bola-8</title>
+<style>
+body {
+  background-image: url('/static/images/fondo.jpg'); /* Path to your image */
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: 'Times New Roman', serif; /* Or a spooky font */
+  color: #000108; /* Dark red text */
+  margin: 0;
+  text-align: center;
+}
+
+h1 {
+  font-size: 3em;
+  text-shadow: 2px 2px 4px #000000; /* Add a shadow effect */
+  margin-bottom: 1em;
+}
+
+button {
+  background-color: #A0522D; /*Sienna*/
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #800000; /*Dark Red*/
+}
+
+#respuesta {
+  font-size: 2em;
+  margin-top: 2em;
+  text-shadow: 2px 2px 4px #000000;
+}
+</style>
+</head>
+<body>
+  <h1>Spooky Bola-8</h1>
+  <form action="/adivinar" method="post">
+    <button type="submit">Pregunta al fantasma del tornillo!</button>
+  </form>
+  <div id="respuesta"></div>
+
+  <script>
+    document.querySelector('form').onsubmit = async function(event) {
+      event.preventDefault();
+      const respuesta = await fetch('/adivinar', { method: 'POST' }).then(response => response.text());
+      document.getElementById('respuesta').innerText = respuesta;
+    };
+  </script>
+</body>
+</html>
